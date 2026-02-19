@@ -278,6 +278,8 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         function createBoard() {
+            board.removeAttribute("class");
+            board.classList.add(player1Symbol);
             for (let i = 1; i <= rows; i++) {
                 for (let j = 1; j <= rows; j++) {
                     const div = document.createElement("div");
@@ -311,6 +313,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     +square.dataset.col - 1,
                 ])
             ) {
+                board.removeAttribute("class");
+                board.classList.add(symbol === 'X' ? 'O' : 'X');
                 square.textContent = symbol;
                 square.classList.add(symbol);
 
@@ -352,7 +356,7 @@ window.addEventListener("DOMContentLoaded", () => {
             winnerPara.textContent = "";
 
             game.gameBoard.resetBoard();
-        })
+        });
 
         return { resetBoard, incrementScore };
     })();

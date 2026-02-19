@@ -326,3 +326,59 @@ input:valid + span::after {
 #board > div:nth-child(9) {
     border-bottom: none;
 }
+
+#winner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+}
+
+#go-to-menu {
+    background-color: #6a7282;
+}
+
+#another-round {
+    background: var(--start-button-gradient);
+}
+
+.buttons button {
+    border-radius: 10px;
+    height: 40px;
+    width: 200px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    border: none;
+    color: white;
+}
+
+button {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    filter: grayscale(0.3);
+    scale: 1.1;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#board.X > div:hover:empty::after {
+    content: "X";
+}
+
+#board.O > div:hover:empty::after {
+    content: "O";
+}
+
+#board.O > div:hover:empty,
+#board.X > div:hover:empty {
+    cursor: pointer;
+    filter: grayscale(0.6);
+}
