@@ -31,7 +31,7 @@ const game = (function () {
             return board;
         }
 
-        function checkWinner(symbolsUsed) {
+        function checkWinner() {
             console.log(board);
 
             let wins = [
@@ -123,26 +123,6 @@ const game = (function () {
         player2 = Player(2);
 
         symbolsUsed = 0;
-        let players = [player1, player2];
-
-        // do {
-        //     const currentPlayerIndex = symbolsUsed % 2;
-        //     const position = players[currentPlayerIndex].promptPosition();
-
-        //     if (
-        //         !gameBoard.addSymbol(
-        //             players[currentPlayerIndex].symbol,
-        //             position,
-        //         )
-        //     )
-        //         continue;
-        //     symbolsUsed++;
-
-        //     if (gameBoard.checkWinner(symbolsUsed)) {
-        //         console.log(players[currentPlayerIndex]);
-        //         return;
-        //     }
-        // } while (1);
     }
 
     function getPlayerDetails(symbol) {
@@ -243,6 +223,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
             p1Score.textContent = "0";
             p2Score.textContent = "0";
+
+            board.addEventListener("click", playOnBoard);
         }
 
         startBtn.addEventListener("click", (e) => {
@@ -301,28 +283,6 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        board.addEventListener("click", (e) => {
-            if (!e.target.dataset.row) return;
-
-            const square = e.target;
-            const symbol =
-                game.getSymbolsUsed() % 2 === 0 ? player1Symbol : player2Symbol;
-            if (
-                game.gameBoard.addSymbol(symbol, [
-                    +square.dataset.row - 1,
-                    +square.dataset.col - 1,
-                ])
-            ) {
-                board.removeAttribute("class");
-                board.classList.add(symbol === 'X' ? 'O' : 'X');
-                square.textContent = symbol;
-                square.classList.add(symbol);
-
-                const winner = game.gameBoard.checkWinner();
-                if (winner) printRoundResult(winner);
-            }
-        });
-
         function printRoundResult(winnerSymbol) {
             const winnerPara = document.querySelector("#winner p");
             if (winnerSymbol === "X" || winnerSymbol === "O") {
@@ -330,7 +290,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     game.getPlayerDetails(winnerSymbol);
                 winnerPara.innerHTML = `The winner of the round is <strong>${winnerPlayer.name}</strong> (<strong>${winnerPlayer.symbol}</strong>)!`;
                 incrementScore(winnerPlayerNumber);
-            } else if (winner === 1)
+            } else if (winnerSymbol === 1)
                 winnerPara.innerHTML =
                     "This round ends with a <strong>DRAW</strong>!";
         }
@@ -356,7 +316,35 @@ window.addEventListener("DOMContentLoaded", () => {
             winnerPara.textContent = "";
 
             game.gameBoard.resetBoard();
+
+            board.addEventListener("click", playOnBoard);
         });
+
+        function playOnBoard(e) {
+            if (!e.target.dataset.row) return;
+
+            const square = e.target;
+            const symbol =
+                game.getSymbolsUsed() % 2 === 0 ? player1Symbol : player2Symbol;
+            if (
+                game.gameBoard.addSymbol(symbol, [
+                    +square.dataset.row - 1,
+                    +square.dataset.col - 1,
+                ])
+            ) {
+                board.removeAttribute("class");
+                board.classList.add(symbol === "X" ? "O" : "X");
+                square.textContent = symbol;
+                square.classList.add(symbol);
+
+                const winner = game.gameBoard.checkWinner();
+                if (winner) {
+                    printRoundResult(winner);
+                    board.removeAttribute("class");
+                    board.removeEventListener("click", playOnBoard);
+                }
+            }
+        }
 
         return { resetBoard, incrementScore };
     })();

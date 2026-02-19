@@ -210,6 +210,11 @@ input:valid + span::after {
     cursor: pointer;
     border-radius: 8px;
     transition: all 0.2s;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .choice-btn.X {
@@ -242,7 +247,8 @@ input:valid + span::after {
     height: 600px;
     display: flex;
     flex-direction: column;
-    gap: 30px
+    gap: 30px;
+    align-items: center;
 }
 
 .ingame-avatar {
@@ -298,7 +304,8 @@ input:valid + span::after {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    height: 100%;
+    height: 320px;
+    width: 320px;
 }
 
 #board > div {
