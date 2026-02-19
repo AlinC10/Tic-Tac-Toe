@@ -24,6 +24,7 @@ const game = (function () {
         let board;
 
         function resetBoard() {
+            symbolsUsed = 0;
             board = null;
 
             board = Array.from({ length: 3 }, () => new Array(3).fill(null));
@@ -112,7 +113,7 @@ const game = (function () {
             }
         }
 
-        return { checkWinner, addSymbol, resetBoard};
+        return { checkWinner, addSymbol, resetBoard };
     })();
 
     function startGame() {
@@ -145,14 +146,14 @@ const game = (function () {
     }
 
     function getPlayerDetails(symbol) {
-            return symbol === player1.symbol ? [player1, 1] : [player2, 2];
+        return symbol === player1.symbol ? [player1, 1] : [player2, 2];
     }
 
     function getSymbolsUsed() {
         return symbolsUsed;
     }
 
-    return { startGame, getSymbolsUsed, gameBoard, getPlayerDetails  };
+    return { startGame, getSymbolsUsed, gameBoard, getPlayerDetails };
 })();
 
 let displayController;
@@ -171,11 +172,11 @@ window.addEventListener("DOMContentLoaded", () => {
         const board = document.getElementById("board");
 
         let player1Symbol = "X";
-        let player2Symbol = "0";
+        let player2Symbol = "O";
 
         function setSymbol(p1Choice) {
             player1Symbol = p1Choice;
-            player2Symbol = p1Choice === "X" ? "0" : "X";
+            player2Symbol = p1Choice === "X" ? "O" : "X";
 
             function addActiveSymbol(btn, playerSymbol) {
                 if (btn.dataset.value === playerSymbol)
@@ -206,7 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         symbolSelectorP2.forEach((btn) => {
             btn.addEventListener("click", () => {
-                const val = btn.dataset.value === "X" ? "0" : "X";
+                const val = btn.dataset.value === "X" ? "O" : "X";
                 setSymbol(val);
             });
         });
@@ -231,7 +232,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 ".score-container h3",
             );
             const playersSymbol = [player1Symbol, player2Symbol];
+
             ingameSymbol.forEach((symbol, index) => {
+                symbol.removeAttribute("class");
                 symbol.textContent = playersSymbol[index];
                 symbol.classList.add(
                     `${playersSymbol[index] === "X" ? "X" : "O"}`,
@@ -269,7 +272,9 @@ window.addEventListener("DOMContentLoaded", () => {
         function resetBoard() {
             if (!board.children.length) return;
 
-            board.children.forEach((div) => div.remove());
+            Array.from(board.children).forEach((div) => {
+                div.remove();
+            });
         }
 
         function createBoard() {
@@ -298,7 +303,8 @@ window.addEventListener("DOMContentLoaded", () => {
             if (!e.target.dataset.row) return;
 
             const square = e.target;
-            const symbol = game.getSymbolsUsed() % 2 === 0 ? player1Symbol : player2Symbol;
+            const symbol =
+                game.getSymbolsUsed() % 2 === 0 ? player1Symbol : player2Symbol;
             if (
                 game.gameBoard.addSymbol(symbol, [
                     +square.dataset.row - 1,
@@ -314,16 +320,39 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         function printRoundResult(winnerSymbol) {
-            const winnerPara = document.querySelector("#winner p")
+            const winnerPara = document.querySelector("#winner p");
             if (winnerSymbol === "X" || winnerSymbol === "O") {
-                const [winnerPlayer, winnerPlayerNumber] = game.getPlayerDetails(winnerSymbol);
+                const [winnerPlayer, winnerPlayerNumber] =
+                    game.getPlayerDetails(winnerSymbol);
                 winnerPara.innerHTML = `The winner of the round is <strong>${winnerPlayer.name}</strong> (<strong>${winnerPlayer.symbol}</strong>)!`;
                 incrementScore(winnerPlayerNumber);
-
             } else if (winner === 1)
                 winnerPara.innerHTML =
                     "This round ends with a <strong>DRAW</strong>!";
         }
+
+        const goToMenuBtn = document.getElementById("go-to-menu");
+        goToMenuBtn.addEventListener("click", () => {
+            const gameUi = document.getElementById("game-ui");
+            gameUi.classList.add("hidden");
+
+            const homeScreen = document.getElementById("home-screen");
+            homeScreen.classList.remove("hidden");
+
+            const winnerPara = document.querySelector("#winner p");
+            winnerPara.textContent = "";
+        });
+
+        const anotherRound = document.getElementById("another-round");
+        anotherRound.addEventListener("click", () => {
+            resetBoard();
+            createBoard();
+
+            const winnerPara = document.querySelector("#winner p");
+            winnerPara.textContent = "";
+
+            game.gameBoard.resetBoard();
+        })
 
         return { resetBoard, incrementScore };
     })();
