@@ -349,3 +349,36 @@ window.addEventListener("DOMContentLoaded", () => {
         return { resetBoard, incrementScore };
     })();
 });
+
+window.addEventListener("DOMContentLoaded", pageTheme)
+
+function pageTheme() {
+    const toggleBtn = document.getElementById("theme-modes");
+    const html = document.querySelector("html");
+
+    if(!toggleBtn) return;
+
+    const iconLightMode = "./images/light-svgrepo-com.svg";
+    const iconDarkMode = "./images/night-svgrepo-com.svg";
+
+    function updateIcon(isDark) {
+        toggleBtn.src = (isDark) ? iconLightMode : iconDarkMode;
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    const currentTheme = localStorage.getItem("theme");
+    if(currentTheme === "dark")
+    {
+        html.classList.add("dark-mode");
+        updateIcon(true);
+    }
+    else
+        updateIcon(false);
+
+    toggleBtn.addEventListener("click", () => {
+        html.classList.toggle("dark-mode");
+
+        const isDark = html.classList.contains("dark-mode");
+        updateIcon(isDark);
+    })
+}
