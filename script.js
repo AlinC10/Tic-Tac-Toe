@@ -205,8 +205,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
             const playersImg = document.querySelectorAll(".players.cards img");
             const playersAvatar = document.querySelectorAll(".ingame-avatar");
-            playersAvatar[0].src = playersImg[0].src;
-            playersAvatar[1].src = playersImg[1].src;
+            imageController.setPlayersAvatar(0);
+            imageController.setPlayersAvatar(1);
 
             const ingameSymbol = document.querySelectorAll(
                 ".score-container h3",
@@ -348,37 +348,124 @@ window.addEventListener("DOMContentLoaded", () => {
 
         return { resetBoard, incrementScore };
     })();
+
+    const imageController = (function () {
+        const imageInputs = document.querySelectorAll('input[type="file"]');
+        const images = document.querySelectorAll(".image-container img");
+        const imageContainers = document.querySelectorAll(".image-container");
+        const chooseImageContainers = document.querySelectorAll(".choose-images");
+
+        Array.from(imageInputs).forEach((input, index) => {
+            const image = images[index];
+            input.addEventListener("change", () => {
+                const file = input.files[0];
+
+                if (file) {
+                    const maxSizeInBytes = 2 * 1024 * 1024;
+
+                    if (file.size > maxSizeInBytes) {
+                        alert(
+                            "Image is bigger than 2MB! Choose an image with size below 2MB!",
+                        );
+
+                        input.value = "";
+                        image.src = "";
+
+                        return;
+                    }
+
+                    addDeleteImgBtn(image, index, input);
+                } else image.src = "";
+            });
+        });
+
+        function addDeleteImgBtn(image, index, input = null) {
+            const deleteImage = document.createElement("p");
+            deleteImage.classList.add("delete-image");
+            deleteImage.textContent = "X";
+
+            const chooseImgContainer = chooseImageContainers[index];
+            chooseImgContainer.classList.add("hidden");
+
+            const containerImg = imageContainers[index];
+            containerImg.appendChild(deleteImage);
+            deleteImage.addEventListener(
+                "click",
+                () => {
+                    chooseImgContainer.classList.remove("hidden");
+                    if (input) input.value = "";
+                    image.src = "";
+                    deleteImage.remove();
+                },
+                { once: true },
+            );
+        }
+
+        function randomAvatar(img) {
+            const randomNumber = Math.floor(Math.random() * 4);
+            const randomChosenAvatar = `./images/players-avatars/avatar${randomNumber}.avif`;
+            img.src = randomChosenAvatar;
+        }
+
+        const randomAvatarBtn = document.querySelectorAll(".random-avatar");
+        Array.from(randomAvatarBtn).forEach((btn, index) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                useRandomAvatar(index);
+            });
+        });
+
+        function useRandomAvatar(index) {
+            const image = images[index];
+            const container = imageContainers[index];
+            randomAvatar(image);
+            const containerImg = imageContainers[index];
+            const chooseImgContainer = chooseImageContainers[index];
+            addDeleteImgBtn(image, index);
+        }
+
+        function setPlayersAvatar(index) {
+            const playerAvatar = images[index];
+            const playerIngameAvatar =
+                document.querySelectorAll(".ingame-avatar")[index];
+            if (playerAvatar.getAttribute("src"))
+                playerIngameAvatar.src = playerAvatar.src;
+            else {
+                useRandomAvatar(index);
+                playerIngameAvatar.src = playerAvatar.src;
+            }
+        }
+
+        return { setPlayersAvatar };
+    })();
 });
 
-window.addEventListener("DOMContentLoaded", pageTheme)
+window.addEventListener("DOMContentLoaded", pageTheme);
 
 function pageTheme() {
     const toggleBtn = document.getElementById("theme-modes");
     const html = document.querySelector("html");
 
-    if(!toggleBtn) return;
+    if (!toggleBtn) return;
 
     const iconLightMode = "./images/light-svgrepo-com.svg";
     const iconDarkMode = "./images/night-svgrepo-com.svg";
 
     function updateIcon(isDark) {
-        toggleBtn.src = (isDark) ? iconLightMode : iconDarkMode;
+        toggleBtn.src = isDark ? iconLightMode : iconDarkMode;
         localStorage.setItem("theme", isDark ? "dark" : "light");
     }
 
     const currentTheme = localStorage.getItem("theme");
-    if(currentTheme === "dark")
-    {
+    if (currentTheme === "dark") {
         html.classList.add("dark-mode");
         updateIcon(true);
-    }
-    else
-        updateIcon(false);
+    } else updateIcon(false);
 
     toggleBtn.addEventListener("click", () => {
         html.classList.toggle("dark-mode");
 
         const isDark = html.classList.contains("dark-mode");
         updateIcon(isDark);
-    })
+    });
 }

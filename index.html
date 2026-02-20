@@ -13,10 +13,16 @@
         <h1>Tic Tac Toe</h1>
         <div id="home-screen">
             <div id="first-player" class="players cards">
-                <img
-                    src="./images/general-img-landscape.png"
-                    alt="player1 avatar"
-                />
+                <div class="image-container">
+                    <div class="choose-images">
+                        <label for="player1-input-img">Add a photo (max 2MB)</label>
+                        <input type="file" accept="image/*" id="player1-input-img" class="image-input">
+                        <button class="random-avatar">Random Avatar</button>
+                    </div>
+                    <img
+                        src=""
+                    />
+                </div>
                 <div class="player-options">
                     <div class="players-name">
                         <label for="player1-name">Player's 1 name *</label>
@@ -25,6 +31,7 @@
                             name="player1-name"
                             id="player1-name"
                             placeholder="Ex: John Cena"
+                            maxlength="20"
                             required
                         />
                         <span></span>
@@ -63,10 +70,16 @@
                 </div>
             </div>
             <div id="second-player" class="players cards">
-                <img
-                    src="./images/general-img-landscape.png"
-                    alt="player2 avatar"
-                />
+                <div class="image-container">
+                    <div class="choose-images">
+                        <label for="player2-input-img">Add a photo (max 2MB)</label>
+                        <input type="file" accept="image/*" id="player2-input-img" class="image-input">
+                        <button class="random-avatar">Random Avatar</button>
+                    </div>
+                    <img
+                        src=""
+                    />
+                </div>
                 <div class="player-options">
                     <div class="players-name">
                         <label for="player2-name">Player's 2 name *</label>
@@ -75,6 +88,7 @@
                             name="player2-name"
                             id="player2-name"
                             placeholder="Ex: Shrek"
+                            maxlength="20"
                             required
                         />
                         <span></span>
@@ -93,7 +107,7 @@
                 <div class="cards" id="first-player-game">
                     <div class="player-details">
                         <img class="ingame-avatar" src="" alt="player1 avatar" />
-                        <h4 class="name">John Cena</h4>
+                        <h4 class="name"></h4>
                     </div>
                     <div class="score-container">
                         <h3 id="player1-ingame-symbol" class=""></h3>
@@ -110,7 +124,7 @@
                     </div>
                     <div class="player-details">
                         <img class="ingame-avatar" src="" alt="player2 avatar" />
-                        <h4 class="name">Shrek</h4>
+                        <h4 class="name"></h4>
                     </div>
                 </div>
             </div>
