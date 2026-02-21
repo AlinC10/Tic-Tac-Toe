@@ -7,7 +7,6 @@
     --cards-color: #ffffff;
     --home-screen-height: 500px;
 
-    /* (default for player1 = X and player2 = 0) reverse gradient if player1 choose 0 and player2 X */
     --start-button-gradient: linear-gradient(90deg, #3b82f6, #f43f5e);
     --text-color: #000;
     --input-color: #f3e8ff;
@@ -29,7 +28,7 @@
         sans-serif;
 
     background: var(--background-gradient);
-    /* height: 100vh; */
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
 }
 
 .dark-mode {
