@@ -355,6 +355,8 @@ window.addEventListener("DOMContentLoaded", () => {
         const imageContainers = document.querySelectorAll(".image-container");
         const chooseImageContainers = document.querySelectorAll(".choose-images");
 
+        const numberOfRandomAvatars = 4;
+
         Array.from(imageInputs).forEach((input, index) => {
             const image = images[index];
             input.addEventListener("change", () => {
@@ -374,6 +376,16 @@ window.addEventListener("DOMContentLoaded", () => {
                         return;
                     }
 
+                    if(!file.type.startsWith('image')) {
+                        alert("Invalid File! Please use a image!");
+                        image.src= "";
+                        input.value = "";
+
+                        return;
+                    }
+
+                    const imageUrl = URL.createObjectURL(file);
+                    image.src = imageUrl;
                     addDeleteImgBtn(image, index, input);
                 } else image.src = "";
             });
@@ -402,7 +414,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         function randomAvatar(img) {
-            const randomNumber = Math.floor(Math.random() * 4);
+            const randomNumber = Math.floor(Math.random() * numberOfRandomAvatars);
             const randomChosenAvatar = `./images/players-avatars/avatar${randomNumber}.avif`;
             img.src = randomChosenAvatar;
         }
