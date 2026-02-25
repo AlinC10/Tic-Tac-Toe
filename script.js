@@ -79,14 +79,36 @@ const game = (function () {
                     [0, 2],
                 ],
             ];
-            for (let combo of wins) {
-                let [a, b, c] = combo;
+            for(let i = 0; i < wins.length; i++) {
+                let [a, b, c] = wins[i];
 
                 const x = board[a[0]][a[1]];
                 const y = board[b[0]][b[1]];
                 const z = board[c[0]][c[1]];
 
-                if (x && x === y && y === z) return x;
+                if (x && x === y && y === z) {
+                    let type;
+                    let lineType = 0;
+
+                    if(i < 3) {
+                        type = "row";
+                        lineType = i;
+                    }
+                    else if(i < 6) {
+                        type = "col";
+                        lineType = i % 3;
+                    }
+                    else if(i == 7) {
+                        type = "diag";
+                        lineType = 1;
+                    }
+                    else {
+                        type = "diag";
+                        lineType = 2;
+                    }
+
+                    return [type, lineType, x];
+                }
             }
 
             if (symbolsUsed === 9) {
@@ -339,10 +361,54 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 const winner = game.gameBoard.checkWinner();
                 if (winner) {
-                    printRoundResult(winner);
+                    printRoundResult(winner[2]);
                     board.removeAttribute("class");
                     board.removeEventListener("click", playOnBoard);
+                    const [type, diagType] = [winner[0], winner[1]];
+                    drawLineOverWInningPositions([type, diagType], winner[2]);
                 }
+            }
+        }
+
+        function drawLineOverWInningPositions(positions, winningSymbol) {
+            function addHLine(i, type) {
+                const hLine = document.createElement("hr");
+                board.children[i].appendChild(hLine);
+                hLine.classList.add(`line${j}`);
+                hLine.classList.add(type);
+                hLine.classList.add(winningSymbol);
+            }
+
+            let j = 0;
+            switch (positions[0]) {
+                case "diag":
+                    switch (positions[1]) {
+                        case 2:
+                            for (let i = 0; i <= 8; i += 4) {
+                                addHLine(i, `${positions[0]}1`);
+                                j++;
+                            }
+                            break;
+                        case 1:
+                            for (let i = 6; i >= 2; i -= 2) {
+                                addHLine(i, `${positions[0]}2`);
+                                j++;
+                            }
+                            break;
+                    }
+                    break;
+                case "row":
+                    for (let i = 0; i < 3; i++) {
+                        addHLine(i + positions[1] * 3, positions[0]);
+                        j++;
+                    }
+                    break;
+                case "col":
+                    for (let i = 0; i < 3; i++) {
+                        addHLine(i * 3 + positions[1], positions[0]);
+                        j++;
+                    }
+                    break;
             }
         }
 
@@ -353,7 +419,8 @@ window.addEventListener("DOMContentLoaded", () => {
         const imageInputs = document.querySelectorAll('input[type="file"]');
         const images = document.querySelectorAll(".image-container img");
         const imageContainers = document.querySelectorAll(".image-container");
-        const chooseImageContainers = document.querySelectorAll(".choose-images");
+        const chooseImageContainers =
+            document.querySelectorAll(".choose-images");
 
         const numberOfRandomAvatars = 4;
 
@@ -376,9 +443,9 @@ window.addEventListener("DOMContentLoaded", () => {
                         return;
                     }
 
-                    if(!file.type.startsWith('image')) {
+                    if (!file.type.startsWith("image")) {
                         alert("Invalid File! Please use a image!");
-                        image.src= "";
+                        image.src = "";
                         input.value = "";
 
                         return;
@@ -414,7 +481,9 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         function randomAvatar(img) {
-            const randomNumber = Math.floor(Math.random() * numberOfRandomAvatars);
+            const randomNumber = Math.floor(
+                Math.random() * numberOfRandomAvatars,
+            );
             const randomChosenAvatar = `./images/players-avatars/avatar${randomNumber}.avif`;
             img.src = randomChosenAvatar;
         }

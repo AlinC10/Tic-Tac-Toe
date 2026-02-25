@@ -387,6 +387,7 @@ input:valid + span::after {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .X {
@@ -559,4 +560,58 @@ button:active {
 
 .name {
     word-break: break-all;
+}
+
+hr {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1000;
+    border: none;
+    width: 102%;
+    height: 4px;
+
+    translate: -50% -50%;
+    clip-path: inset(0 100% 0 0);
+}
+
+@keyframes extendLine {
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+hr.X {
+    background-color: var(--x-color);
+}
+hr.O {
+    background-color: var(--o-color);
+}
+
+hr.diag1 {
+    rotate: 45deg;
+    width: 144%
+}
+hr.diag2 {
+    rotate: -45deg;
+    width: 144%;
+}
+hr.col {
+    rotate: 90deg;
+}
+
+hr.line0,
+hr.line1,
+hr.line2 {
+    animation: extendLine 0.3s linear both;
+}
+
+hr.line0 {
+    animation-delay: 0s;
+}
+hr.line1 {
+    animation-delay: 0.3s;
+}
+hr.line2 {
+    animation-delay: 0.6s;
 }
