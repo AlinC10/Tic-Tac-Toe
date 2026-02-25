@@ -180,6 +180,10 @@ input[type="file"] {
     border-radius: 10px;
 }
 
+img[src=""] {
+    display: none;
+}
+
 .delete-image {
     position: absolute;
     top: 5px;
