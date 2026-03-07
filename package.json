@@ -1,0 +1,47 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "This project was made as part of **The Odin Project** <a href=\"https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe\">curriculum</a>.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "prod:test": "npm run build && webpack serve",
+    "deploy": "bash deploy.sh",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write .",
+    "format-and-fix": "npm run format && npm run lint:fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlinC10/Tic-Tac-Toe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/AlinC10/Tic-Tac-Toe/issues"
+  },
+  "homepage": "https://github.com/AlinC10/Tic-Tac-Toe#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.0",
+    "@eslint/js": "^10.0.1",
+    "css-loader": "^7.1.4",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-format": "^2.0.1",
+    "globals": "^17.4.0",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.6",
+    "jest": "^30.2.0",
+    "prettier": "^3.8.1",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.105.3",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.3",
+    "webpack-merge": "^6.0.1"
+  }
+}

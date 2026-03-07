@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <title>Tic Tac Toe</title>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./images/tic-tac-toe-svgrepo-com.svg"
+    />
+    <!-- <script src="script.js" type="module"></script> -->
+  </head>
+  <body>
+    <img alt="color modes" id="theme-modes" />
+    <h1>Tic Tac Toe</h1>
+    <div id="home-screen">
+      <div id="first-player" class="players cards">
+        <div class="image-container">
+          <div class="choose-images">
+            <label for="player1-input-img">Add a photo (max 2MB)</label>
+            <input
+              type="file"
+              accept="image/*"
+              id="player1-input-img"
+              class="image-input"
+            />
+            <button class="random-avatar">Random Avatar</button>
+          </div>
+          <img />
+        </div>
+        <div class="player-options">
+          <div class="players-name">
+            <label for="player1-name">Player's 1 name *</label>
+            <input
+              type="text"
+              name="player1-name"
+              id="player1-name"
+              placeholder="Ex: John Cena"
+              maxlength="20"
+              required
+            />
+            <span></span>
+          </div>
+          <div class="symbol-choose" id="player1-symbol">
+            <button class="choice-btn X activeX" data-value="X">X</button>
+            <button class="choice-btn O" data-value="O">O</button>
+          </div>
+        </div>
+      </div>
+      <div id="start">
+        <div class="vs-container">
+          <h2>VS</h2>
+        </div>
+        <div id="start-section">
+          <div id="rules" class="cards">
+            <h3>Game Rules:</h3>
+            <ul>
+              <li>Two people alternately play X and O on a 3×3 board</li>
+              <li>
+                The one who lines up 3 symbols in a row, column or diagonal wins
+              </li>
+              <li>
+                If the board fills up without a winner, the game ends in a draw
+              </li>
+            </ul>
+          </div>
+          <button>Start Game</button>
+        </div>
+      </div>
+      <div id="second-player" class="players cards">
+        <div class="image-container">
+          <div class="choose-images">
+            <label for="player2-input-img">Add a photo (max 2MB)</label>
+            <input
+              type="file"
+              accept="image/*"
+              id="player2-input-img"
+              class="image-input"
+            />
+            <button class="random-avatar">Random Avatar</button>
+          </div>
+          <img />
+        </div>
+        <div class="player-options">
+          <div class="players-name">
+            <label for="player2-name">Player's 2 name *</label>
+            <input
+              type="text"
+              name="player2-name"
+              id="player2-name"
+              placeholder="Ex: Shrek"
+              maxlength="20"
+              required
+            />
+            <span></span>
+          </div>
+          <div class="symbol-choose" id="player2-symbol">
+            <button class="choice-btn X" data-value="X">X</button>
+            <button class="choice-btn O activeO" data-value="O">O</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="game-ui" class="hidden">
+      <div id="players-game">
+        <div class="cards" id="first-player-game">
+          <div class="player-details">
+            <img class="ingame-avatar" alt="player1 avatar" />
+            <h4 class="name"></h4>
+          </div>
+          <div class="score-container">
+            <h3 id="player1-ingame-symbol" class=""></h3>
+            <h2 class="score" id="player1-score"></h2>
+          </div>
+        </div>
+        <div class="vs-container">
+          <h2>VS</h2>
+        </div>
+        <div class="cards" id="second-player-game">
+          <div class="score-container">
+            <h3 id="player2-ingame-symbol" class=""></h3>
+            <h2 class="score" id="player2-score"></h2>
+          </div>
+          <div class="player-details">
+            <img class="ingame-avatar" alt="player2 avatar" />
+            <h4 class="name"></h4>
+          </div>
+        </div>
+      </div>
+      <div id="board"></div>
+      <div id="winner">
+        <p></p>
+      </div>
+      <div class="buttons">
+        <button id="go-to-menu">Go to Menu</button>
+        <button id="another-round">Another Round</button>
+      </div>
+    </div>
+  </body>
+</html>
