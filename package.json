@@ -7,7 +7,7 @@
     "test": "jest",
     "dev": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "prod:test": "npm run build && webpack serve",
+    "prod:test": "webpack serve --open --config webpack.prod.js",
     "deploy": "bash deploy.sh",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
