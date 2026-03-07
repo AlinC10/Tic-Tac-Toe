@@ -4,7 +4,7 @@
 
 This project was made as part of **The Odin Project** <a href="https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe">curriculum</a>.
 
-This project is a **Tic Tac Toe** game enhanced with an interactive setup menu. Users can customize their players by uploading a profile photo, shoosing a username and selecting their preferred playing symbol (X or O).
+This project is a **Tic Tac Toe** game enhanced with an interactive setup menu. Users can customize their players by uploading a profile photo, choosing a username and selecting their preferred playing symbol (X or O).
 
 ## Tech used
 
@@ -25,7 +25,7 @@ This project is a **Tic Tac Toe** game enhanced with an interactive setup menu. 
 The project started as a simple game, but I decided to add elements that let users customize their characters to make the experience more engaging.
 
 - **Layout Strategies:**
-  - **CSS Grid:** Used for Home Screen. It centers the rules section using `fr` units while kepping the left and right player customization panels symmetrical
+  - **CSS Grid:** Used for Home Screen. It centers the rules section using `fr` units while keeping the left and right player customization panels symmetrical
   - **FlexBox:** Used for the main `body` layout, the Game UI containers and more little containers from Home Screen to easily control elements distribution inside containers.
 - **Data Handling:** Player choices (photo, name, symbol) are captured on the Home Screen. When the game starts, this data is copied into the Game UI scoreboard. If the player skips photo selection, a random avatar is generated automatically. The username has a maximum length of 20 characters, to not break the game layout.
 - **JavaScript Design Patterns:** To keep the code clean and organized, I implemented **IIFE** and **Factory Functions**
@@ -44,7 +44,7 @@ The project started as a simple game, but I decided to add elements that let use
 
 - **File Handling in the Browser:** I learned how to process user-uploaded images entirely on the client side using `createObjectURL()`, how to validate file extensions and limiting file size.
 - **Form Validation:** I discovered how to use browser's Constraint Validation API (`checkValidity()` and `reportValidity()`) to use native HTML validation rules.
-- **State Synchronization:** Implementing the logic where Player 1's symbol choice (X or O) automaticaly updates Player 2's option and vice versa.
+- **State Synchronization:** Implementing the logic where Player 1's symbol choice (X or O) automatically updates Player 2's option and vice versa.
 
 ## Images Used
 
