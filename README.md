@@ -25,6 +25,10 @@ This project is a **Tic Tac Toe** game enhanced with an interactive setup menu. 
 The project started as a simple game, but I decided to add elements that let users customize their characters to make the experience more engaging.
 
 - **Layout Strategies:**
+  - **Computer Opponent:** Implemented a bot with 3 difficulty levels:
+    - **Easy:** Makes random moves;
+    - **Normal:** Combines algorithms from `easy` and `hard` difficulty levels. It checks which algorithm to choose based on a random number, both options having a 50% chance to be selected. If the `easy` path is chosen, the bot will first analyze the board to check if it can win or if it's necessary to block player's winning path. If neither is required, the bot will use the `easy` algorithm.
+    - **Hard:** Uses the Minimax algorithm to verify all possible outcomes, making it completely unbeatable.
   - **CSS Grid:** Used for Home Screen. It centers the rules section using `fr` units while keeping the left and right player customization panels symmetrical
   - **FlexBox:** Used for the main `body` layout, the Game UI containers and more little containers from Home Screen to easily control elements distribution inside containers.
 - **Data Handling:** Player choices (photo, name, symbol) are captured on the Home Screen. When the game starts, this data is copied into the Game UI scoreboard. If the player skips photo selection, a random avatar is generated automatically. The username has a maximum length of 20 characters, to not break the game layout.
@@ -42,6 +46,7 @@ The project started as a simple game, but I decided to add elements that let use
 
 ## Lessons Learned
 
+- **Algorithmic Thinking:** I implemented the Minimax algorithm using backtracking to create a computer opponent.
 - **File Handling in the Browser:** I learned how to process user-uploaded images entirely on the client side using `createObjectURL()`, how to validate file extensions and limiting file size.
 - **Form Validation:** I discovered how to use browser's Constraint Validation API (`checkValidity()` and `reportValidity()`) to use native HTML validation rules.
 - **State Synchronization:** Implementing the logic where Player 1's symbol choice (X or O) automatically updates Player 2's option and vice versa.
