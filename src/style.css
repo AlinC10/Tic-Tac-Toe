@@ -165,6 +165,7 @@ input[type='file'] {
 .players.cards {
   height: 100%;
   padding: 15px;
+  position: relative;
 }
 
 .image-container {
@@ -173,7 +174,7 @@ input[type='file'] {
   width: 100%;
 }
 
-.players.cards img {
+.players.cards .avatar {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -241,6 +242,107 @@ input:valid + span::after {
 .symbol-choose {
   display: flex;
   gap: 10px;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+.select-difficulty {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: none;
+  z-index: 10000;
+  cursor: pointer;
+  background-color: var(--cards-color);
+  color: var(--text-color);
+}
+
+.difficulties > p {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 7px;
+  margin-left: 5px;
+  display: block;
+}
+
+.difficulties > .select-trigger {
+  width: 100%;
+  border-radius: 20px;
+  padding: 8px 15px;
+  text-align: left;
+  font-size: 1.5rem;
+  border: 2px solid #000;
+}
+
+.difficulties {
+  position: relative;
+  opacity: 0;
+}
+
+.select-trigger {
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.select-trigger > img {
+  height: 20px;
+  filter: brightness(0);
+  float: right;
+  transition: transform 0.5s ease;
+}
+
+.open img {
+  transform: rotate(180deg);
+}
+
+.open > .select-difficulty {
+  display: block;
+}
+
+.difficulty {
+  padding: 8px 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.select-player {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.type-of-player {
+  display: flex;
+  gap: 10px;
+}
+
+.type-of-player label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  padding: 6px;
+  width: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.selected,
+label.selected {
+  background: var(--start-button-gradient);
+  color: var(--cards-color);
+}
+
+label[for='bot'].selected + .difficulties {
+  opacity: 1;
 }
 
 #start {
@@ -503,7 +605,7 @@ button {
     align-items: start;
   }
 
-  .players.cards img {
+  .avatar {
     height: 300px;
   }
 

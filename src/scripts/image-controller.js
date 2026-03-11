@@ -91,10 +91,7 @@ export const imageController = (function () {
 
   function useRandomAvatar(index) {
     const image = images[index];
-    // const container = imageContainers[index];
     randomAvatar(image);
-    // const containerImg = imageContainers[index];
-    // const chooseImgContainer = chooseImageContainers[index];
     addDeleteImgBtn(image, index);
   }
 

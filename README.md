@@ -50,8 +50,8 @@ The project started as a simple game, but I decided to add elements that let use
 
 - **Player Avatars:** Designed by <a href="https://www.freepik.com/">Freepik</a>
   - <a href="https://www.freepik.com/free-vector/cute-girl-gaming-holding-joystick-cartoon-icon-illustration-people-technology-icon-concept-isolated-flat-cartoon-style_10909202.htm#fromView=keyword&page=1&position=1&uuid=50af5718-375b-4c0d-8156-c11e715d16d0&query=Game+avatar">1</a>
-  * <a href="https://www.freepik.com/free-vector/cute-girl-gaming-holding-joystick-cartoon-icon-illustration-people-technology-icon-concept-isolated-flat-cartoon-style_10909202.htm#fromView=keyword&page=1&position=1&uuid=50af5718-375b-4c0d-8156-c11e715d16d0&query=Game+avatar">2</a>
-  * <a href="https://www.freepik.com/free-vector/cute-astronaut-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology_400006264.htm#fromView=keyword&page=1&position=2&uuid=17d7340a-668f-4f8d-a1b7-54fc522613e6&query=Gaming+avatar">3</a>
-  * <a href="https://www.freepik.com/free-vector/cute-cat-gaming-cartoon_13486463.htm#fromView=keyword&page=1&position=0&uuid=de5398fc-e1bc-4ae3-b5ab-020c79228be5&query=Gaming+avatar">4</a>
+  - <a href="https://www.freepik.com/free-vector/cute-girl-gaming-holding-joystick-cartoon-icon-illustration-people-technology-icon-concept-isolated-flat-cartoon-style_10909202.htm#fromView=keyword&page=1&position=1&uuid=50af5718-375b-4c0d-8156-c11e715d16d0&query=Game+avatar">2</a>
+  - <a href="https://www.freepik.com/free-vector/cute-astronaut-playing-vr-game-with-controller-cartoon-vector-icon-illustration-science-technology_400006264.htm#fromView=keyword&page=1&position=2&uuid=17d7340a-668f-4f8d-a1b7-54fc522613e6&query=Gaming+avatar">3</a>
+  - <a href="https://www.freepik.com/free-vector/cute-cat-gaming-cartoon_13486463.htm#fromView=keyword&page=1&position=0&uuid=de5398fc-e1bc-4ae3-b5ab-020c79228be5&query=Gaming+avatar">4</a>
 
 * **SVG:** https://www.svgrepo.com/

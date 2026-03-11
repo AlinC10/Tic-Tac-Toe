@@ -4,7 +4,13 @@ import { game } from './game-logic.js';
 export const displayController = (function () {
   const rows = 3;
 
-  let symbolSelectorP1, symbolSelectorP2, startBtn, p1Score, p2Score, board;
+  let symbolSelectorP1,
+    symbolSelectorP2,
+    startBtn,
+    p1Score,
+    p2Score,
+    board,
+    selectMenu;
 
   let player1Symbol = 'X';
   let player2Symbol = 'O';
@@ -55,6 +61,45 @@ export const displayController = (function () {
     p1Score = document.getElementById('player1-score');
     p2Score = document.getElementById('player2-score');
     board = document.getElementById('board');
+
+    selectMenu = document.querySelector('.difficulties');
+    selectMenu.addEventListener('click', (e) =>
+      selectMenuToggle(e, selectMenu),
+    );
+
+    function selectMenuToggle(e, selectMenu) {
+      const target = e.target;
+      if (
+        target.classList.contains('select-trigger') ||
+        target.parentNode.classList.contains('select-trigger')
+      ) {
+        e.preventDefault();
+        selectMenu.classList.toggle('open');
+      }
+      if (target.classList.contains('difficulty')) {
+        const menuChildNodes = selectMenu.children;
+        menuChildNodes[0].children[0].textContent = target.textContent;
+        for (const item of menuChildNodes[1].children) {
+          if (item.classList.contains('selected'))
+            item.classList.remove('selected');
+        }
+        target.classList.add('selected');
+        selectMenu.classList.remove('open');
+      }
+    }
+
+    const selectPlayerLabels = document.querySelectorAll(
+      '.type-of-player label',
+    );
+    const selectPlayerLabelsArr = Array.from(selectPlayerLabels);
+    selectPlayerLabelsArr.forEach((label) => {
+      label.addEventListener('click', () => {
+        for (const it of selectPlayerLabelsArr)
+          if (it.classList.contains('selected'))
+            it.classList.remove('selected');
+        label.classList.add('selected');
+      });
+    });
   }
 
   function setSymbol(p1Choice) {
@@ -87,8 +132,6 @@ export const displayController = (function () {
     playersNamesH4[0].textContent = p1Name;
     playersNamesH4[1].textContent = p2Name;
 
-    // const playersImg = document.querySelectorAll('.players.cards img');
-    // const playersAvatar = document.querySelectorAll('.ingame-avatar');
     imageController.setPlayersAvatar(0);
     imageController.setPlayersAvatar(1);
 
@@ -181,16 +224,51 @@ export const displayController = (function () {
     const square = e.target;
     const symbol =
       game.getSymbolsUsed() % 2 === 0 ? player1Symbol : player2Symbol;
+
     if (
-      game.gameBoard.addSymbol(symbol, [
-        +square.dataset.row - 1,
-        +square.dataset.col - 1,
+      addSymbolAndCheckWinner(symbol, [
+        square.dataset.row - 1,
+        square.dataset.col - 1,
       ])
-    ) {
-      board.removeAttribute('class');
-      board.classList.add(symbol === 'X' ? 'O' : 'X');
+    )
+      if (game.p2IsBot() && game.getSymbolsUsed() < 9) {
+        const selectedDifficulty = document.querySelector(
+          '.difficulty.selected',
+        );
+        addSymbolAndCheckWinner(
+          player2Symbol,
+          game.botLogic.chosenDifficulty(
+            selectedDifficulty.textContent.toLowerCase(),
+            player2Symbol,
+          ),
+        );
+      }
+  }
+
+  function addSymbolAndCheckWinner(symbol, position) {
+    if (game.gameBoard.addSymbol(symbol, [position[0], position[1]])) {
+      let square;
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < rows; j++) {
+          square = board.children[rows * i + j];
+          if (
+            +square.dataset.row === position[0] + 1 &&
+            +square.dataset.col === position[1] + 1
+          )
+            break;
+        }
+        if (
+          +square.dataset.row === position[0] + 1 &&
+          +square.dataset.col === position[1] + 1
+        )
+          break;
+      }
+
       square.textContent = symbol;
       square.classList.add(symbol);
+
+      board.removeAttribute('class');
+      board.classList.add(symbol === 'X' ? 'O' : 'X');
 
       const winner = game.gameBoard.checkWinner();
       if (winner) {
@@ -199,8 +277,12 @@ export const displayController = (function () {
         board.removeEventListener('click', playOnBoard);
         const [type, diagType] = [winner[0], winner[1]];
         drawLineOverWInningPositions([type, diagType], winner[2]);
+
+        return false;
       }
-    }
+
+      return true;
+    } else return false;
   }
 
   function drawLineOverWInningPositions(positions, winningSymbol) {

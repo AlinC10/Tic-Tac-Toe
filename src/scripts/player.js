@@ -8,6 +8,15 @@ export function Player(playerNumber) {
   );
   symbol = symbol[0].dataset.value;
   let score = 0;
+  let playerType = 'player';
 
-  return { name, symbol, score };
+  if (playerNumber === 2) {
+    const typeOfPlayer = document.querySelector(
+      '.type-of-player label.selected',
+    );
+
+    playerType = typeOfPlayer.dataset.player;
+  }
+
+  return { name, symbol, score, playerType };
 }

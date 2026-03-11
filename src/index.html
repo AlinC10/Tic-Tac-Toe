@@ -4,13 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
     <title>Tic Tac Toe</title>
-    <!-- <link rel="stylesheet" href="style.css" /> -->
     <link
       rel="icon"
       type="image/x-icon"
       href="./images/tic-tac-toe-svgrepo-com.svg"
     />
-    <!-- <script src="script.js" type="module"></script> -->
   </head>
   <body>
     <img alt="color modes" id="theme-modes" />
@@ -28,7 +26,7 @@
             />
             <button class="random-avatar">Random Avatar</button>
           </div>
-          <img />
+          <img class="avatar" />
         </div>
         <div class="player-options">
           <div class="players-name">
@@ -70,6 +68,35 @@
         </div>
       </div>
       <div id="second-player" class="players cards">
+        <div class="select-player">
+          <div class="type-of-player">
+            <input
+              type="radio"
+              name="type-of-player"
+              id="player"
+              value="player"
+              checked
+            /><label for="player" class="selected" data-player="player"
+              >Player</label
+            ><input
+              type="radio"
+              name="type-of-player"
+              id="bot"
+              value="bot"
+            /><label for="bot" data-player="bot">Bot</label>
+            <div class="difficulties">
+              <div class="select-trigger">
+                <span>Easy</span>
+                <img src="./images/down-arrow.svg" alt="arrow down" />
+              </div>
+              <div class="select-difficulty">
+                <div class="difficulty selected">Easy</div>
+                <div class="difficulty">Normal</div>
+                <div class="difficulty">Hard</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="image-container">
           <div class="choose-images">
             <label for="player2-input-img">Add a photo (max 2MB)</label>
@@ -81,7 +108,7 @@
             />
             <button class="random-avatar">Random Avatar</button>
           </div>
-          <img />
+          <img class="avatar" />
         </div>
         <div class="player-options">
           <div class="players-name">
